@@ -1,14 +1,14 @@
 # MTG-Card-Lookup
 
 ## Table of Contents
-- [About The Project]
-- [Built With]
-- [Getting Started]
-- [Usage]
-- [Roadmap]
+- [About The Project](#about-the-project)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
 - [Contributing]
 - [License]
-- [Contact]
+- [Contact](#contact)
 - [Acknowledgements]
 
 ## About the Project
