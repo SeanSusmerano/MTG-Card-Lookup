@@ -49,6 +49,7 @@ The goal is to sell high-value cards individually and sell the remaining bulk to
 - [ ] Implement a way to check recently checked cards to see if a card can be skipped in search
 - [ ] Optimize API request batching to improve speed
 - [ ] Handle API rate limiting more gracefully
+- [ ] Improve Documentation
 
 ## Contact
 Sean Susmerano - - susmeranosean@gmail.com
