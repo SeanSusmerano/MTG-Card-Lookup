@@ -122,7 +122,7 @@ class Google_API:
 
 
 def main():
-    bb = Google_API(id = "101dVi5c5JYgGuusMnPslOSN0Fzl39o_7BNSGz7ausqI")
+    bb = Google_API(id = "private")
     print(bb.add_Sell_Individually("test"))
 
 if (__name__ == "__main__"):
