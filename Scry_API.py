@@ -6,7 +6,13 @@ class Scryfall_API:
 
 
     def check_Valid_Card(self, card_data:dict):
-        return (None == card_data['prices']['usd'])
+        if('status' in card_data):
+            return False
+        elif(None == card_data['prices']['usd']):
+            return False
+        else:
+            return True
+    #Add a way to differentiate what the issue is, missing price, or card couldn't be found.
 
 
     def get_Price(self, card_data:dict):
