@@ -29,7 +29,7 @@ class Google_API:
         self.Search_List_Worksheet = self.document.worksheet("Search_List")
         self.Sell_Individually_Worksheet = self.document.worksheet("Sell_Individually")
 
-        self.date = date.today()
+        self.date = str(date.today())
 
 
     def Add_Already_Searched(self,card_name:str):
@@ -56,7 +56,7 @@ class Google_API:
         if(self.sell_individually_position == -1):
             card_List = self.Sell_Individually_Worksheet.col_values(1)
             self.sell_individually_position = len(card_List)
-        sell_individually_position += 1
+        self.sell_individually_position += 1
         
         self.Sell_Individually_Worksheet.update_acell(f"A{self.sell_individually_position}", card_name)
         self.Sell_Individually_Worksheet.update_acell(f"B{self.sell_individually_position}", price)
@@ -110,6 +110,10 @@ class Google_API:
             return True
         else:
             return False
+        
+
+    def remove_Duplicates_From_Already_Searched():
+        return
         
     
     def set_Filename(self, filename: str):
