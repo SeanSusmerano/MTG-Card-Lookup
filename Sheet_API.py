@@ -19,9 +19,9 @@ class Google_API:
         elif(self.document_link == None):
             self.document = client.open_by_key(self.document_id)
 
-        self.already_searched_position = -1
-        self.unable_to_search_position = -1
-        self.sell_individually_position = -1
+        self.already_searched_position = 1
+        self.unable_to_search_position = 1
+        self.sell_individually_position = 1
 
         self.Already_Searched_Worksheet = self.document.worksheet("Already_Searched")
         self.Do_Not_Search_Worksheet = self.document.worksheet("Do_Not_Search")
@@ -31,29 +31,33 @@ class Google_API:
 
         self.date = str(date.today())
 
+        self.write_count = 0
+
 
     def Add_Already_Searched(self,card_name:str):
-        if(self.already_searched_position == -1):
+        if(self.already_searched_position == 1):
             card_List = self.Already_Searched_Worksheet.col_values(1)
             self.already_searched_position = len(card_List)
         self.already_searched_position += 1
 
         self.Already_Searched_Worksheet.update_acell(f"A{self.already_searched_position}", card_name)
         self.Already_Searched_Worksheet.update_acell(f"B{self.already_searched_position}", self.date)
+        self.write_count += 2
 
 
     def Add_Unable_To_Search(self, card_name:str, reason:str):
-        if(self.unable_to_search_position == -1):
+        if(self.unable_to_search_position == 1):
             card_List = self.Unable_To_Search_Worksheet.col_values(1)
-            self.unable_to_search_position == len(card_List)
+            self.unable_to_search_position = len(card_List)
         self.unable_to_search_position += 1
 
         self.Unable_To_Search_Worksheet.update_acell(f"A{self.unable_to_search_position}", card_name)
         self.Unable_To_Search_Worksheet.update_acell(f"B{self.unable_to_search_position}", reason)
+        self.write_count += 2
 
 
     def add_Sell_Individually(self, card_name:str, price:str):
-        if(self.sell_individually_position == -1):
+        if(self.sell_individually_position == 1):
             card_List = self.Sell_Individually_Worksheet.col_values(1)
             self.sell_individually_position = len(card_List)
         self.sell_individually_position += 1
@@ -61,6 +65,7 @@ class Google_API:
         self.Sell_Individually_Worksheet.update_acell(f"A{self.sell_individually_position}", card_name)
         self.Sell_Individually_Worksheet.update_acell(f"B{self.sell_individually_position}", price)
         self.Sell_Individually_Worksheet.update_acell(f"C{self.sell_individually_position}", self.date)
+        self.write_count += 3
 
 
     def clear_Search_List(self):
@@ -95,6 +100,7 @@ class Google_API:
             card_Index = card_List.index(card_name)
 
             self.Already_Searched_Worksheet.update_acell(f"B{card_Index}", self.date)
+            self.write_count += 1
             return True
         else:
             return False
@@ -107,6 +113,7 @@ class Google_API:
 
             self.Sell_Individually_Worksheet.update_acell(f"B{card_Index}", price)
             self.Sell_Individually_Worksheet.update_acell(f"C{card_Index}", self.date)
+            self.write_count += 2
             return True
         else:
             return False
@@ -126,8 +133,8 @@ class Google_API:
 
 
 def main():
-    bb = Google_API(id = "private")
-    print(bb.add_Sell_Individually("test"))
+    bb = Google_API(link = "https://docs.google.com/spreadsheets/d/101dVi5c5JYgGuusMnPslOSN0Fzl39o_7BNSGz7ausqI/edit?gid=0#gid=0")
+    bb.Add_Unable_To_Search("Kor Halberd", "TEST")
 
 if (__name__ == "__main__"):
     main()
