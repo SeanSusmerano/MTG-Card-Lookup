@@ -11,11 +11,11 @@ def check_If_Worth_Searching(card_name: str, already_searched:dict):
         return True
     else:
         return False
-    
+
+
 def wait():
     print("Quick minute break to not exceed Google write Request Limit.")
     time.sleep(60)
-    
 
 
 def main():
