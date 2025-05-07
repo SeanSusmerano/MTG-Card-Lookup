@@ -90,6 +90,7 @@ The goal is to sell high-value cards individually and sell the remaining bulk to
 - [ ] Handle API rate limiting more gracefully
 - [ ] Improve Documentation
 - [ ] Add Regular Card and Foil Card Prices
+- [ ] Add Missing Sheets Catch
 
 
 ## Conributing
