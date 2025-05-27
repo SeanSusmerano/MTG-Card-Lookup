@@ -5,26 +5,22 @@ class Scryfall_API:
         self.placeholder = None
 
 
-    def check_Valid_Card(self, card_data:dict, card_foil:str):
-        foil_check = False
-
-        if(len(card_foil) > 0):
-            foil_check = True
+    def check_Valid_Card(self, card_data: dict, foil_bool: bool):
 
         if('status' in card_data):
             return False
-        elif((None == card_data['prices']['usd']) and (not foil_check)):
+        elif((None == card_data['prices']['usd']) and (not foil_bool)):
             return False
-        elif((None == card_data['prices']['usd_foil']) and foil_check):
+        elif((None == card_data['prices']['usd_foil']) and foil_bool):
             return False
         else:
             return True
     #Add a way to differentiate what the issue is, missing price, or card couldn't be found.
 
 
-    def get_Price(self, card_data:dict, card_foil: str):
+    def get_Price(self, card_data:dict, foil_bool: bool):
 
-        if(len(card_foil) > 0):
+        if(foil_bool):
             return card_data['prices']['usd_foil']
         else:
             return card_data['prices']['usd']

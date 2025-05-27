@@ -34,9 +34,9 @@ class Google_API:
         self.write_count = 0
 
 
-    def Add_Already_Searched(self,card_name:str, card_foil:str):
+    def Add_Already_Searched(self,card_name:str, foil_bool: bool):
 
-        if(len(card_foil) > 0):
+        if(foil_bool):
             card_name += ' (f)'
 
         if(self.already_searched_position == 1):
@@ -49,8 +49,8 @@ class Google_API:
         self.write_count += 2
 
 
-    def Add_Unable_To_Search(self, card_name:str, card_foil:str, reason:str):
-        if(len(card_foil) > 0):
+    def Add_Unable_To_Search(self, card_name:str, foil_bool: bool, reason:str):
+        if(foil_bool):
             card_name += ' (f)'
 
         if(self.unable_to_search_position == 1):
@@ -63,8 +63,8 @@ class Google_API:
         self.write_count += 2
 
 
-    def add_Sell_Individually(self, card_name:str, card_foil:str, price:str):
-        if(len(card_foil) > 0):
+    def add_Sell_Individually(self, card_name:str, foil_bool: bool, price:str):
+        if(foil_bool):
             card_name += ' (f)'
 
         if(self.sell_individually_position == 1):
@@ -99,9 +99,9 @@ class Google_API:
         search_List = self.Search_List_Worksheet.col_values(1)
         search_Foil_List = self.Search_List_Worksheet.col_values(2)
         
-        search_List_Dict = dict(zip(search_List[1:], search_Foil_List[1:]))
+        search_List_Data = [search_List, search_Foil_List]
 
-        return search_List_Dict
+        return search_List_Data
     
 
     def grab_Sell_Individually_List(self):
@@ -109,10 +109,10 @@ class Google_API:
         return sell_List[1:]
     
 
-    def update_Already_Searched_Card(self, card_name:str, card_foil:str):
+    def update_Already_Searched_Card(self, card_name:str, foil_bool: bool):
         card_List = self.Already_Searched_Worksheet.col_values(1)
 
-        if(len(card_foil) > 0):
+        if(foil_bool):
             card_name += ' (f)'
 
         if(card_name in card_List):
