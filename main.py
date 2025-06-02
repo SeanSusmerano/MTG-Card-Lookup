@@ -7,6 +7,8 @@ def check_If_Worth_Searching(card_name: str, foil_Bool: bool, already_searched:d
     if(foil_Bool):
         card_name += " (f)"
 
+    print(card_name)
+
     if(card_name in already_searched):
         days_since_searched = (date.today() - datetime.strptime(already_searched[card_name], '%Y-%m-%d').date()).days
 
@@ -14,6 +16,32 @@ def check_If_Worth_Searching(card_name: str, foil_Bool: bool, already_searched:d
         return True
     else:
         return False
+
+
+def check_If_Foil(foil_List:list, card_Index: int):
+    try:
+        index_Value = foil_List[card_Index]
+    except:
+        return False
+    
+    if(len(index_Value) > 0):
+        return True
+    else:
+        return False
+
+
+def check_If_Proper_Link(): #Continue working on this.
+    proper_link = False
+
+    while(not proper_link):
+        user_input = input("What is the link to the Google Sheets Document(Or type 'exit' to stop this script):")
+
+        if("docs.google.com/spreadsheets/" in user_input):
+            proper_link = True
+        elif("exit" in user_input.lower()):
+            return
+        else:
+            print("I'm sorry that doesn't appear to be a proper input.")
 
 
 def get_Card_Index(card_List: list, card_Name: str):
@@ -74,19 +102,14 @@ def main():
             search_List_Data[0] = card_List_Check[0]
             card_Index = card_List_Check[1]
 
-        elif((not card_List_Check[2]) and (card_List_Check == -1)):
-            #Then something went wrong
+        elif((not card_List_Check[2]) and (card_List_Check[1] == -1)):
             print("Something went wrong with this card")
             print(f"Completed: {counter}/{search_Length}")
             continue
         else:
             card_Index = card_List_Check[1]
 
-        foil_Bool = False
-        print(search_List_Data[1])
-        print(card_Index)
-        if(len(search_List_Data[1][card_Index]) > 0):
-            foil_Bool = True
+        foil_Bool = check_If_Foil(search_List_Data[1], card_Index)
 
         should_Check = check_If_Worth_Searching(each_card, foil_Bool, already_Searched_Dictionary)
         if((each_card in do_Not_Search_List) or (each_card == "")):
@@ -96,11 +119,15 @@ def main():
         card_data = scry.request_Card_Data(each_card)
         valid_card = scry.check_Valid_Card(card_data, foil_Bool)
         card_price = 0
+        if(foil_Bool):
+            new_card_name = each_card + " (f)"
+        else:
+            new_card_name = each_card
         
         if(valid_card and should_Check):
             card_price = scry.get_Price(card_data, foil_Bool)
             document.update_Already_Searched_Card(each_card, foil_Bool)
-        elif(valid_card and (each_card not in already_Searched_Dictionary)):
+        elif(valid_card and (new_card_name not in already_Searched_Dictionary)):
             card_price = scry.get_Price(card_data, foil_Bool)
             document.Add_Already_Searched(each_card, foil_Bool)
         elif(not valid_card):
