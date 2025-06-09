@@ -60,7 +60,7 @@ The goal is to sell high-value cards individually and sell the remaining bulk to
 
 
 4. Setup your Google Sheets
-   Go to https://docs.google.com/spreadsheets/d/101dVi5c5JYgGuusMnPslOSN0Fzl39o_7BNSGz7ausqI/edit?usp=sharing
+   Go to https://docs.google.com/spreadsheets/d/1_gTTCpk67fewGXhpHqiMNz5gzJBA4ZEtwVl59Fx4Jd8/edit?usp=sharing
    - Download the template and upload it to your own personal Google Drive.
    - Once you have your own copy of the template, open it, and click "Share" on the upper right hand corner.
       - You will need that email from earlier and paste it into "Add people, groups, and calendar events".
