@@ -7,8 +7,6 @@ def check_If_Worth_Searching(card_name: str, foil_Bool: bool, already_searched:d
     if(foil_Bool):
         card_name += " (f)"
 
-    print(card_name)
-
     if(card_name in already_searched):
         days_since_searched = (date.today() - datetime.strptime(already_searched[card_name], '%Y-%m-%d').date()).days
 
